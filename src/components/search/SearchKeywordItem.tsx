@@ -1,17 +1,18 @@
 import { styled } from 'styled-components';
 import { ReactComponent as SearchIcon } from 'asset/img/search.svg';
+import { ComponentProps } from 'react';
 
-interface Props {
+interface Props extends ComponentProps<'button'> {
   keyword: string;
   wholeWord: string;
 }
-const SearchKeywordItem = ({ keyword, wholeWord }: Props) => {
+const SearchKeywordItem = ({ keyword, wholeWord, ...rest }: Props) => {
   const splited = wholeWord
     .split(new RegExp(`(${keyword})`, 'gi'))
     .filter((word) => word.length > 0);
 
   return (
-    <StyledButton>
+    <StyledButton {...rest}>
       <Icon />
       {splited.map((word, index) => (
         <StyledText key={`${word}_${index}`} $isHighlighted={word === keyword}>
