@@ -10,6 +10,7 @@
     "@types/node": "^16.18.48",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
+    "concurrently": "^8.2.1",
     "eslint": "^8.48.0",
     "eslint-config": "^0.3.0",
     "eslint-plugin-react": "^7.33.2",
@@ -22,10 +23,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "backend": "git clone https://github.com/walking-sunset/assignment-api.git; cd assignment-api&& npm i; npm start",
+    "frontend": "react-scripts start",
+    "start": "concurrently \"npm run backend\" \"npm run frontend\"",
     "lint": "eslint --cache .",
     "prettier": "prettier --write ."
   },
