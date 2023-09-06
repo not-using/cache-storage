@@ -10,12 +10,12 @@ const SearchBar = ({ ...rest }: Props) => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <StyledForm {...rest} isFocused={isFocused}>
-      <Icon isHidden={isFocused || value.length > 0} />
+    <StyledForm {...rest} $isFocused={isFocused}>
+      <Icon $isHidden={isFocused || value.length > 0} />
       <StyledInput
         placeholder={isFocused ? '' : '질환명을 입력해 주세요.'}
         value={value}
-        isFocused={isFocused}
+        $isFocused={isFocused}
         onChange={(e) => setValue(e.currentTarget.value)}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
@@ -27,7 +27,7 @@ const SearchBar = ({ ...rest }: Props) => {
 
 export default SearchBar;
 
-const StyledForm = styled.form<{ isFocused: boolean }>`
+const StyledForm = styled.form<{ $isFocused: boolean }>`
   min-width: 300px;
   max-width: 490px;
   width: 100%;
@@ -43,7 +43,7 @@ const StyledForm = styled.form<{ isFocused: boolean }>`
   justify-content: space-between;
   align-items: center;
   position: relative;
-  outline: ${({ isFocused }) => (isFocused ? '2px solid #007be9' : 'none')};
+  outline: ${({ $isFocused }) => ($isFocused ? '2px solid #007be9' : 'none')};
   &:before {
     content: ' ';
     position: absolute;
@@ -55,7 +55,7 @@ const StyledForm = styled.form<{ isFocused: boolean }>`
   }
 `;
 
-const StyledInput = styled(Input)<{ isFocused: boolean }>`
+const StyledInput = styled(Input)<{ $isFocused: boolean }>`
   font-size: 1rem;
   line-height: 1.6;
   flex-grow: 1;
@@ -65,9 +65,9 @@ const StyledInput = styled(Input)<{ isFocused: boolean }>`
   &:placeholder {
     color: #a7afb7;
   }
-  margin-left: ${({ isFocused }) => isFocused && '8px'};
+  margin-left: ${({ $isFocused }) => $isFocused && '8px'};
 `;
-const Icon = styled(SearchIcon)<{ isHidden?: boolean }>`
+const Icon = styled(SearchIcon)<{ $isHidden?: boolean }>`
   width: 16px;
   height: 16px;
   color: #a7afb7;
@@ -75,7 +75,7 @@ const Icon = styled(SearchIcon)<{ isHidden?: boolean }>`
   cursor: pointer;
   margin-right: 8px;
 
-  display: ${({ isHidden = false }) => (isHidden ? 'none' : 'block')};
+  display: ${({ $isHidden = false }) => ($isHidden ? 'none' : 'block')};
 `;
 
 const SearchButton = styled(Icon)`
