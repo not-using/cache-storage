@@ -15,6 +15,7 @@ export const fetcher = async (uri: string): Promise<Sick[]> => {
       'Content-Type': 'application/json; charset=utf-8',
     },
   });
+  console.info('calling api');
   setCache(uri, freshData.clone());
   return freshData.json();
 };
