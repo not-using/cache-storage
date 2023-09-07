@@ -1,9 +1,11 @@
-import { ComponentProps, useState } from 'react';
+import { ComponentProps, FormEventHandler, useState } from 'react';
+import { ReactComponent as SearchIcon } from 'asset/img/search.svg';
+import useSearch from 'hooks/useSearch';
+import { getLocalStroage, setLocalStroage } from 'utils/localStorage';
+import { MAX_RECENT, RECENT_KEY } from 'constants/recentKeyword';
 import styled from 'styled-components';
 import Input from 'components/commons/Input';
 import SearchBarDropdown from 'components/search/SearchBarDropdown';
-import { ReactComponent as SearchIcon } from 'asset/img/search.svg';
-import useSearch from 'hooks/useSearch';
 
 type Props = ComponentProps<'form'>;
 
@@ -11,8 +13,16 @@ const SearchBar = ({ ...rest }: Props) => {
   const { keyword, seacrhKeyword, setKeyword, recommends } = useSearch();
   const [isFocused, setIsFocused] = useState(false);
 
+  const addRecentKeyword: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    const searched = keyword.trim();
+    if (searched.length === 0) return;
+    const recentKeywords = getLocalStroage<string[]>(RECENT_KEY);
+    setLocalStroage(RECENT_KEY, [...recentKeywords, searched].slice(0, MAX_RECENT));
+  };
+
   return (
-    <StyledForm {...rest} $isFocused={isFocused}>
+    <StyledForm {...rest} $isFocused={isFocused} onSubmit={addRecentKeyword}>
       <Icon $isHidden={isFocused || keyword.length > 0} />
       <StyledInput
         placeholder={isFocused ? '' : '질환명을 입력해 주세요.'}
