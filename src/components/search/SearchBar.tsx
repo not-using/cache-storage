@@ -1,6 +1,6 @@
 import { ComponentProps, FormEventHandler, useState } from 'react';
 import { ReactComponent as SearchIcon } from 'asset/img/search.svg';
-import useSearch from 'hooks/useSearch';
+import { useSearch } from 'hooks/useSearch';
 import { getLocalStroage, setLocalStroage } from 'utils/localStorage';
 import { MAX_RECENT, RECENT_KEY } from 'constants/recentKeyword';
 import styled from 'styled-components';
@@ -10,7 +10,7 @@ import SearchBarDropdown from 'components/search/SearchBarDropdown';
 type Props = ComponentProps<'form'>;
 
 const SearchBar = ({ ...rest }: Props) => {
-  const { keyword, seacrhKeyword, setKeyword, recommends } = useSearch();
+  const { keyword, searchKeyword, setKeyword, recommends } = useSearch();
   const [isFocused, setIsFocused] = useState(false);
 
   const addRecentKeyword: FormEventHandler<HTMLFormElement> = (e) => {
@@ -28,7 +28,7 @@ const SearchBar = ({ ...rest }: Props) => {
         placeholder={isFocused ? '' : '질환명을 입력해 주세요.'}
         value={keyword}
         $isFocused={keyword.length > 0 || isFocused}
-        onChange={(e) => seacrhKeyword(e.currentTarget.value)}
+        onChange={(e) => searchKeyword(e.currentTarget.value)}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
       />
