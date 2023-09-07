@@ -13,18 +13,22 @@ interface Props {
 const SearchBarDropdownRecommend = ({ keyword, recommends, setKeyword }: Props) => {
   const [selectedIndex, setSelectedIndex] = useState<number>(recommends.length - 1);
 
+  const changeIndex = (index: number) => {
+    setSelectedIndex(index);
+    setKeyword(recommends[index].sickNm);
+  };
+
   useKeyEvent((e: KeyboardEvent) => {
     if (e.isComposing) return;
     if (e.key === 'ArrowDown') {
-      setSelectedIndex((selectedIndex + 1) % recommends.length);
+      changeIndex((selectedIndex + 1) % recommends.length);
     } else if (e.key === 'ArrowUp') {
-      setSelectedIndex((selectedIndex + recommends.length - 1) % recommends.length);
+      changeIndex((selectedIndex + recommends.length - 1) % recommends.length);
     }
   });
 
   return (
     <>
-      <SearchKeywordItem keyword={keyword} wholeWord={keyword} />
       <StyledText>추천 검색어</StyledText>
       {recommends.map((recommend, index) => (
         <StyledSearchKeywordItem
