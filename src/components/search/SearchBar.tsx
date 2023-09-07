@@ -17,7 +17,7 @@ const SearchBar = ({ ...rest }: Props) => {
       <StyledInput
         placeholder={isFocused ? '' : '질환명을 입력해 주세요.'}
         value={keyword}
-        $isFocused={isFocused}
+        $isFocused={keyword.length > 0 || isFocused}
         onChange={(e) => seacrhKeyword(e.currentTarget.value)}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
@@ -48,6 +48,7 @@ const StyledForm = styled.form<{ $isFocused: boolean }>`
   background-color: #ffffff;
   padding: 12px 20px;
   box-shadow: 0px 2px 4px rgba(30, 32, 37, 0.1);
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -42,10 +42,7 @@ const SearchBarDropdownRecommend = ({ keyword, recommends, setKeyword }: Props) 
 export default SearchBarDropdownRecommend;
 
 const StyledText = styled.p`
-  font-size: 14px;
-  line-height: 20px;
-  color: #c2c8ce;
-  padding: 0 20px;
+  padding: 0 24px;
   margin: 0;
 `;
 
