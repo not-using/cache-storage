@@ -7,9 +7,8 @@ export const useRecentKeyword = () => {
   const [recentKeywords, setRecentKeywords] = useState<string[]>(saved);
 
   const addRecentKeyword = (keyword: string) => {
-    if (recentKeywords.includes(keyword)) return;
-    const newKeywords = [keyword, ...recentKeywords].slice(0, MAX_RECENT);
-    setLocalStroage(RECENT_KEY, newKeywords);
+    const newKeywords = [keyword, ...recentKeywords.filter((k) => k !== keyword)];
+    setLocalStroage(RECENT_KEY, newKeywords.slice(0, MAX_RECENT));
     setRecentKeywords(newKeywords);
   };
 
