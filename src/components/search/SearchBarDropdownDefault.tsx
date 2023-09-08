@@ -15,17 +15,16 @@ const SearchBarDropdownDefault = () => {
       <StyledText>최근 검색어</StyledText>
       <StyledRecentDiv>
         {recentKeywords.map((keyword) => (
-          <>
-            <StyledSearchKeywordItem wholeWord={keyword} key={keyword} keyword="">
-              <DeleteButton
-                onClick={(e) => {
-                  e.stopPropagation();
-                  removeRecentKeyword(keyword);
-                }}
-                size={20}
-              />
-            </StyledSearchKeywordItem>
-          </>
+          <StyledListItem key={keyword}>
+            <SearchKeywordItem wholeWord={keyword} keyword="" />
+            <DeleteButton
+              onClick={(e) => {
+                e.stopPropagation();
+                removeRecentKeyword(keyword);
+              }}
+              size={20}
+            />
+          </StyledListItem>
         ))}
       </StyledRecentDiv>
       <StyledText>추천검색어로 검색해보세요</StyledText>
@@ -79,8 +78,10 @@ const StyledButton = styled.div`
   cursor: pointer;
 `;
 
-const StyledSearchKeywordItem = styled(SearchKeywordItem)`
+const StyledListItem = styled.li`
   position: relative;
+  padding: 0;
+  display: inherit;
 `;
 
 const DeleteButton = styled(XButton)`
