@@ -65,6 +65,7 @@ const StyledForm = styled.form<{ $isFocused: boolean }>`
   border: 0;
   border-color: #c2c8ce;
   background-color: #ffffff;
+  margin-top: 100px;
   padding: 12px 12px 12px 20px;
   box-shadow: 0px 2px 4px rgba(30, 32, 37, 0.1);
   box-sizing: border-box;
