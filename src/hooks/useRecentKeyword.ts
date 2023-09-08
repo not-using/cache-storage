@@ -8,8 +8,9 @@ export const useRecentKeyword = () => {
 
   const addRecentKeyword = (keyword: string) => {
     const newKeywords = [keyword, ...recentKeywords.filter((k) => k !== keyword)];
-    setLocalStroage(RECENT_KEY, newKeywords.slice(0, MAX_RECENT));
-    setRecentKeywords(newKeywords);
+    const slicedKeywords = newKeywords.slice(0, MAX_RECENT);
+    setLocalStroage(RECENT_KEY, slicedKeywords);
+    setRecentKeywords(slicedKeywords);
   };
 
   const removeRecentKeyword = (keyword: string) => {
