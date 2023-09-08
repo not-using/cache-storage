@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { styled } from 'styled-components';
-import { useKeyEvent } from 'hooks/useKeyEvent';
-import { Sick } from 'types/Sick';
+import { useEvent } from 'hooks/useEvent';
+import type { Sick } from 'types/Sick';
+import styled from 'styled-components';
 import SearchKeywordItem from './SearchKeywordItem';
 
 interface Props {
@@ -18,7 +18,7 @@ const SearchBarDropdownRecommend = ({ keyword, recommends, setKeyword }: Props) 
     setKeyword(recommends[index].sickNm);
   };
 
-  useKeyEvent((e: KeyboardEvent) => {
+  useEvent('keydown', (e: KeyboardEvent) => {
     if (e.isComposing) return;
     if (e.key === 'ArrowDown') {
       changeIndex((selectedIndex + 1) % recommends.length);
