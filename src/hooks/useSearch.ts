@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useDebounce } from './useDebounce';
-import { Sick } from 'types/Sick';
+import { useRecentKeyword } from './useRecentKeyword';
 import { getSick } from 'api/getSick';
-import { addRecentKeyword } from 'utils/recentKeyword';
+import type { Sick } from 'types/Sick';
 
 export const useSearch = () => {
   const [keyword, setKeyword] = useState('');
   const [recommends, setRecommends] = useState<Sick[]>([]);
+  const { recentKeywords, addRecentKeyword } = useRecentKeyword();
 
   const debounce = useDebounce();
 
@@ -27,5 +28,12 @@ export const useSearch = () => {
     alert(`검색어: ${searched}`);
   };
 
-  return { keyword, recommends, searchKeyword, searchRecommends, setKeyword };
+  return {
+    keyword,
+    recommends,
+    searchKeyword,
+    searchRecommends,
+    setKeyword,
+    recentKeywords,
+  };
 };

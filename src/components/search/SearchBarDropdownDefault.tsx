@@ -1,14 +1,12 @@
 import { useContext } from 'react';
 import { SearchContext } from 'context/SearchContext';
-import { getRecentKeywords } from 'utils/recentKeyword';
 import styled from 'styled-components';
 import SearchKeywordItem from './SearchKeywordItem';
 
 const RECOMMENDS = ['B형간염', '비만', '관절염', '우울증', '식도염'];
 
 const SearchBarDropdownDefault = () => {
-  const { searchKeyword } = useContext(SearchContext);
-  const recentKeywords = getRecentKeywords();
+  const { searchKeyword, recentKeywords } = useContext(SearchContext);
 
   return (
     <>
