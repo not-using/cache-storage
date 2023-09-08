@@ -1,5 +1,4 @@
-const CACHE_KEY = 'cache-v1';
-export const CACHE_MAX_AGE = 1;
+import { CACHE_KEY } from "constants/cache";
 
 export const cache = async () => {
   const cacheStroage = await caches.open(CACHE_KEY);

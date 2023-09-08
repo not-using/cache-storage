@@ -1,8 +1,6 @@
 import { Sick } from 'types/Sick';
 import { cache } from './cache';
-
-const BASE_URL = 'http://localhost:4000/sick';
-
+import { BASE_URL, BASIC_HEADERS } from 'constants/fetch';
 export const fetcher = async (uri: string): Promise<Sick[]> => {
   const { getCache, setCache } = await cache();
   const cacheData = await getCache(uri);
@@ -11,9 +9,7 @@ export const fetcher = async (uri: string): Promise<Sick[]> => {
   }
 
   const freshData = await fetch(BASE_URL + uri, {
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
-    },
+    headers: BASIC_HEADERS,
   });
   console.info('calling api');
   setCache(uri, freshData.clone());
