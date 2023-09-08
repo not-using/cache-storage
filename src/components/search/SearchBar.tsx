@@ -4,10 +4,12 @@ import { useEvent } from 'hooks/useEvent';
 import styled from 'styled-components';
 import Input from 'components/commons/Input';
 import SearchBarDropdown from 'components/search/SearchBarDropdown';
+import XButton from 'components/commons/XButton';
 import { ReactComponent as SearchIcon } from 'asset/img/search.svg';
 
 const SearchBar = ({ ...rest }: ComponentProps<'form'>) => {
-  const { keyword, searchKeyword, searchRecommends } = useContext(SearchContext);
+  const { keyword, setKeyword, searchKeyword, searchRecommends } =
+    useContext(SearchContext);
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -35,8 +37,17 @@ const SearchBar = ({ ...rest }: ComponentProps<'form'>) => {
         onChange={(e) => searchRecommends(e.currentTarget.value)}
         onFocus={() => setIsFocused(true)}
       />
-      <SearchButton />
-
+      <SearchButton type="submit">
+        <Icon width={21} />
+      </SearchButton>
+      <DeleteButton
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          setKeyword('');
+        }}
+        size={20}
+      />
       {isFocused ? <SearchBarDropdown ref={dropdownRef} /> : null}
     </StyledForm>
   );
@@ -54,7 +65,7 @@ const StyledForm = styled.form<{ $isFocused: boolean }>`
   border: 0;
   border-color: #c2c8ce;
   background-color: #ffffff;
-  padding: 12px 20px;
+  padding: 12px 12px 12px 20px;
   box-shadow: 0px 2px 4px rgba(30, 32, 37, 0.1);
   box-sizing: border-box;
   display: flex;
@@ -62,15 +73,6 @@ const StyledForm = styled.form<{ $isFocused: boolean }>`
   align-items: center;
   position: relative;
   outline: ${({ $isFocused }) => ($isFocused ? '2px solid #007be9' : 'none')};
-  &:before {
-    content: ' ';
-    position: absolute;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    right: 12px;
-    background-color: #007be9;
-  }
 `;
 
 const StyledInput = styled(Input)<{ $isFocused: boolean }>`
@@ -97,9 +99,24 @@ const Icon = styled(SearchIcon)<{ $isHidden?: boolean }>`
   display: ${({ $isHidden = false }) => ($isHidden ? 'none' : 'block')};
 `;
 
-const SearchButton = styled(Icon)`
-  color: white;
-  width: 21px;
-  height: 21px;
-  margin-right: 3px;
+const SearchButton = styled.button`
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #007be9;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & > svg {
+    color: white;
+    margin: 0;
+  }
+`;
+
+const DeleteButton = styled(XButton)`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 64px;
 `;
