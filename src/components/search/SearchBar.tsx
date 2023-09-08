@@ -37,14 +37,16 @@ const SearchBar = ({ ...rest }: ComponentProps<'form'>) => {
         onChange={(e) => searchRecommends(e.currentTarget.value)}
         onFocus={() => setIsFocused(true)}
       />
-      <DeleteButton
-        type="button"
-        onClick={(e) => {
-          e.stopPropagation();
-          setKeyword('');
-        }}
-        size={20}
-      />
+      {keyword.length > 0 ? (
+        <DeleteButton
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setKeyword('');
+          }}
+          size={20}
+        />
+      ) : null}
       <SearchButton type="submit">
         <Icon width={21} />
       </SearchButton>
