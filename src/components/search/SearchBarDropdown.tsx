@@ -7,12 +7,14 @@ interface Props {
   recommends: Sick[];
   keyword: string;
   setKeyword: (keyword: string) => void;
+  searchKeyword: (keyword: string) => void;
 }
-const SearchBarDropdown = ({ keyword, recommends, setKeyword }: Props) => {
+
+const SearchBarDropdown = ({ keyword, recommends, setKeyword, searchKeyword }: Props) => {
   if (keyword.length === 0)
     return (
       <StyledDiv>
-        <SearchBarDropdownDefault />
+        <SearchBarDropdownDefault searchKeyword={searchKeyword} />
       </StyledDiv>
     );
 

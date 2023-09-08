@@ -1,4 +1,4 @@
-import { ComponentProps, FormEventHandler, useState } from 'react';
+import { ComponentProps, FormEventHandler, useEffect, useRef, useState } from 'react';
 import { ReactComponent as SearchIcon } from 'asset/img/search.svg';
 import { useSearch } from 'hooks/useSearch';
 import { getLocalStroage, setLocalStroage } from 'utils/localStorage';
@@ -38,6 +38,7 @@ const SearchBar = ({ ...rest }: Props) => {
           recommends={recommends}
           keyword={keyword}
           setKeyword={setKeyword}
+          searchKeyword={searchKeyword}
         />
       ) : null}
     </StyledForm>
