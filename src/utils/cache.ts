@@ -1,4 +1,4 @@
-import { CACHE_KEY } from "constants/cache";
+import { CACHE_KEY } from 'constants/cache';
 
 export const cache = async () => {
   const cacheStroage = await caches.open(CACHE_KEY);
@@ -9,5 +9,7 @@ export const cache = async () => {
 
   const getCache = async (key: string) => await cacheStroage.match(key);
 
-  return { setCache, getCache };
+  const deleteCache = async (key: string) => await cacheStroage.delete(key);
+
+  return { setCache, getCache, deleteCache };
 };
