@@ -19,6 +19,7 @@ const SearchKeywordItem = ({ keyword, wholeWord, ...rest }: Props) => {
           {word}
         </StyledText>
       ))}
+      {rest.children}
     </StyledButton>
   );
 };

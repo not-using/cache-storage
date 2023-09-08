@@ -2,18 +2,30 @@ import { useContext } from 'react';
 import { SearchContext } from 'context/SearchContext';
 import styled from 'styled-components';
 import SearchKeywordItem from './SearchKeywordItem';
+import XButton from 'components/commons/XButton';
 
 const RECOMMENDS = ['B형간염', '비만', '관절염', '우울증', '식도염'];
 
 const SearchBarDropdownDefault = () => {
-  const { searchKeyword, recentKeywords } = useContext(SearchContext);
+  const { searchKeyword, recentKeywords, removeRecentKeyword } =
+    useContext(SearchContext);
 
   return (
     <>
       <StyledText>최근 검색어</StyledText>
       <StyledRecentDiv>
         {recentKeywords.map((keyword) => (
-          <SearchKeywordItem wholeWord={keyword} key={keyword} keyword="" />
+          <>
+            <StyledSearchKeywordItem wholeWord={keyword} key={keyword} keyword="">
+              <DeleteButton
+                onClick={(e) => {
+                  e.stopPropagation();
+                  removeRecentKeyword(keyword);
+                }}
+                size={20}
+              />
+            </StyledSearchKeywordItem>
+          </>
         ))}
       </StyledRecentDiv>
       <StyledText>추천검색어로 검색해보세요</StyledText>
@@ -64,4 +76,15 @@ const StyledButton = styled.div`
   border: none;
   border-radius: 20px;
   margin: 0 4px;
+`;
+
+const StyledSearchKeywordItem = styled(SearchKeywordItem)`
+  position: relative;
+`;
+
+const DeleteButton = styled(XButton)`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
 `;

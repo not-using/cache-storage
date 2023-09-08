@@ -13,5 +13,11 @@ export const useRecentKeyword = () => {
     setRecentKeywords(newKeywords);
   };
 
-  return { recentKeywords, addRecentKeyword };
+  const removeRecentKeyword = (keyword: string) => {
+    const newKeywords = recentKeywords.filter((k) => k !== keyword);
+    setLocalStroage(RECENT_KEY, newKeywords);
+    setRecentKeywords(newKeywords);
+  };
+
+  return { recentKeywords, addRecentKeyword, removeRecentKeyword };
 };

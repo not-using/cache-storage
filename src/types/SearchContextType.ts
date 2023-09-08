@@ -7,4 +7,5 @@ export type SearchContextType = {
   searchRecommends: (keyword: string) => void;
   recommends: Sick[];
   recentKeywords: string[];
+  removeRecentKeyword: (keyword: string) => void;
 };

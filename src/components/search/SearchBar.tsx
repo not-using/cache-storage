@@ -36,6 +36,7 @@ const SearchBar = ({ ...rest }: ComponentProps<'form'>) => {
         onFocus={() => setIsFocused(true)}
       />
       <SearchButton />
+
       {isFocused ? <SearchBarDropdown ref={dropdownRef} /> : null}
     </StyledForm>
   );

@@ -7,7 +7,7 @@ import type { Sick } from 'types/Sick';
 export const useSearch = () => {
   const [keyword, setKeyword] = useState('');
   const [recommends, setRecommends] = useState<Sick[]>([]);
-  const { recentKeywords, addRecentKeyword } = useRecentKeyword();
+  const { recentKeywords, addRecentKeyword, removeRecentKeyword } = useRecentKeyword();
 
   const debounce = useDebounce();
 
@@ -35,5 +35,6 @@ export const useSearch = () => {
     searchRecommends,
     setKeyword,
     recentKeywords,
+    removeRecentKeyword,
   };
 };
