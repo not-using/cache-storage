@@ -1,19 +1,29 @@
-import { ComponentProps, FormEventHandler, useEffect, useRef, useState } from 'react';
-import { ReactComponent as SearchIcon } from 'asset/img/search.svg';
+import { ComponentProps, FormEventHandler, useRef, useState } from 'react';
 import { useSearch } from 'hooks/useSearch';
+import { useEvent } from 'hooks/useEvent';
 import { getLocalStroage, setLocalStroage } from 'utils/localStorage';
 import { MAX_RECENT, RECENT_KEY } from 'constants/recentKeyword';
 import styled from 'styled-components';
 import Input from 'components/commons/Input';
 import SearchBarDropdown from 'components/search/SearchBarDropdown';
+import { ReactComponent as SearchIcon } from 'asset/img/search.svg';
 
 type Props = ComponentProps<'form'>;
 
 const SearchBar = ({ ...rest }: Props) => {
   const { keyword, searchKeyword, setKeyword, recommends } = useSearch();
   const [isFocused, setIsFocused] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const addRecentKeyword: FormEventHandler<HTMLFormElement> = (e) => {
+  useEvent('click', (e: MouseEvent) => {
+    const clicked = e.target as Node;
+    const isClickedInside =
+      dropdownRef.current?.contains(clicked) || inputRef.current?.contains(clicked);
+    setIsFocused(isClickedInside ?? false);
+  });
+
+  const search: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const searched = keyword.trim();
     if (searched.length === 0) return;
@@ -22,19 +32,20 @@ const SearchBar = ({ ...rest }: Props) => {
   };
 
   return (
-    <StyledForm {...rest} $isFocused={isFocused} onSubmit={addRecentKeyword}>
+    <StyledForm {...rest} $isFocused={isFocused} onSubmit={search}>
       <Icon $isHidden={isFocused || keyword.length > 0} />
       <StyledInput
+        ref={inputRef}
         placeholder={isFocused ? '' : '질환명을 입력해 주세요.'}
         value={keyword}
         $isFocused={keyword.length > 0 || isFocused}
         onChange={(e) => searchKeyword(e.currentTarget.value)}
         onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
       />
       <SearchButton />
       {isFocused ? (
         <SearchBarDropdown
+          ref={dropdownRef}
           recommends={recommends}
           keyword={keyword}
           setKeyword={setKeyword}

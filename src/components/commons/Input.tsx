@@ -1,9 +1,11 @@
-import { ComponentProps } from 'react';
+import { ComponentProps, forwardRef } from 'react';
 import styled from 'styled-components';
 
-const Input = ({ ...rest }: ComponentProps<'input'>) => {
-  return <StyledInput {...rest} />;
-};
+const Input = forwardRef<HTMLInputElement, ComponentProps<'input'>>(
+  ({ ...rest }, ref) => {
+    return <StyledInput {...rest} ref={ref} />;
+  },
+);
 
 export default Input;
 

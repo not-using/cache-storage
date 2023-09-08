@@ -1,5 +1,6 @@
-import { styled } from 'styled-components';
-import { Sick } from 'types/Sick';
+import { forwardRef } from 'react';
+import type { Sick } from 'types/Sick';
+import styled from 'styled-components';
 import SearchBarDropdownDefault from './SearchBarDropdownDefault';
 import SearchBarDropdownRecommend from './SearchBarDropdownRecommend';
 
@@ -10,24 +11,23 @@ interface Props {
   searchKeyword: (keyword: string) => void;
 }
 
-const SearchBarDropdown = ({ keyword, recommends, setKeyword, searchKeyword }: Props) => {
-  if (keyword.length === 0)
+const SearchBarDropdown = forwardRef<HTMLDivElement, Props>(
+  ({ keyword, recommends, setKeyword, searchKeyword }, ref) => {
     return (
-      <StyledDiv>
-        <SearchBarDropdownDefault searchKeyword={searchKeyword} />
+      <StyledDiv ref={ref}>
+        {keyword.length === 0 ? (
+          <SearchBarDropdownDefault searchKeyword={searchKeyword} />
+        ) : (
+          <SearchBarDropdownRecommend
+            keyword={keyword}
+            recommends={recommends}
+            setKeyword={setKeyword}
+          />
+        )}
       </StyledDiv>
     );
-
-  return (
-    <StyledDiv>
-      <SearchBarDropdownRecommend
-        keyword={keyword}
-        recommends={recommends}
-        setKeyword={setKeyword}
-      />
-    </StyledDiv>
-  );
-};
+  },
+);
 
 export default SearchBarDropdown;
 
