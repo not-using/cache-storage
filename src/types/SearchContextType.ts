@@ -8,4 +8,5 @@ export type SearchContextType = {
   recommends: Sick[];
   recentKeywords: string[];
   removeRecentKeyword: (keyword: string) => void;
+  isLoading: boolean;
 };

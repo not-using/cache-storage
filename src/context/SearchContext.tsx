@@ -10,6 +10,7 @@ export const SearchContext = createContext<SearchContextType>({
   searchRecommends: () => {},
   recentKeywords: [],
   removeRecentKeyword: () => {},
+  isLoading: false,
 });
 
 export const SearchContextProvider = ({ children }: PropsWithChildren) => {

@@ -24,7 +24,6 @@ const SearchBarDropdownRecommend = () => {
 
   return (
     <>
-      <StyledText>추천 검색어</StyledText>
       {recommends.map((recommend, index) => (
         <StyledSearchKeywordItem
           key={recommend.sickCd}
@@ -40,12 +39,9 @@ const SearchBarDropdownRecommend = () => {
 
 export default SearchBarDropdownRecommend;
 
-const StyledText = styled.p`
+const ErrorText = styled.p`
   padding: 0 24px;
   margin: 0;
-`;
-
-const ErrorText = styled(StyledText)`
   color: inherit;
   text-align: center;
 `;

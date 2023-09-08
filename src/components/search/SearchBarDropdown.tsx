@@ -6,13 +6,20 @@ import SearchBarDropdownRecommend from './SearchBarDropdownRecommend';
 
 const SearchBarDropdown = forwardRef<HTMLDivElement, ComponentProps<'div'>>(
   (props, ref) => {
-    const { keyword } = useContext(SearchContext);
+    const { keyword, isLoading } = useContext(SearchContext);
     return (
       <StyledDiv {...props} ref={ref}>
         {keyword.length === 0 ? (
           <SearchBarDropdownDefault />
         ) : (
-          <SearchBarDropdownRecommend />
+          <>
+            <StyledText>추천 검색어</StyledText>
+            {isLoading ? (
+              <LoadingText>로딩중..</LoadingText>
+            ) : (
+              <SearchBarDropdownRecommend />
+            )}
+          </>
         )}
       </StyledDiv>
     );
@@ -36,4 +43,14 @@ const StyledDiv = styled.div`
   font-size: 14px;
   line-height: 20px;
   color: rgb(106, 115, 123);
+`;
+
+const StyledText = styled.p`
+  padding: 0 24px;
+  margin: 0;
+`;
+
+const LoadingText = styled(StyledText)`
+  text-align: center;
+  line-height: 3.2;
 `;
