@@ -7,14 +7,11 @@ export const SearchContext = createContext<SearchContextType>({
   recommends: [],
   searchKeyword: () => {},
   setKeyword: () => {},
+  searchRecommends: () => {},
 });
 
 export const SearchContextProvider = ({ children }: PropsWithChildren) => {
-  const { keyword, setKeyword, searchKeyword, recommends } = useSearch();
+  const searchState = useSearch();
 
-  return (
-    <SearchContext.Provider value={{ keyword, setKeyword, searchKeyword, recommends }}>
-      {children}
-    </SearchContext.Provider>
-  );
+  return <SearchContext.Provider value={searchState}>{children}</SearchContext.Provider>;
 };

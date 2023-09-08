@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDebounce } from './useDebounce';
 import { Sick } from 'types/Sick';
 import { getSick } from 'api/getSick';
+import { addRecentKeyword } from 'utils/recentKeyword';
 
 export const useSearch = () => {
   const [keyword, setKeyword] = useState('');
@@ -9,7 +10,7 @@ export const useSearch = () => {
 
   const debounce = useDebounce();
 
-  const searchKeyword = (keyword: string) => {
+  const searchRecommends = (keyword: string) => {
     setKeyword(keyword);
     if (keyword.length === 0) {
       return setRecommends([]);
@@ -19,5 +20,12 @@ export const useSearch = () => {
     }, 500);
   };
 
-  return { keyword, recommends, searchKeyword, setKeyword };
+  const searchKeyword = (keyword: string) => {
+    const searched = keyword.trim();
+    if (searched.length === 0) return;
+    addRecentKeyword(searched);
+    alert(`검색어: ${searched}`);
+  };
+
+  return { keyword, recommends, searchKeyword, searchRecommends, setKeyword };
 };
