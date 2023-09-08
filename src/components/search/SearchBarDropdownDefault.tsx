@@ -1,7 +1,6 @@
-import { RECENT_KEY } from 'constants/recentKeyword';
-import { styled } from 'styled-components';
-import { getLocalStroage } from 'utils/localStorage';
+import styled from 'styled-components';
 import SearchKeywordItem from './SearchKeywordItem';
+import { getRecentKeywords } from 'utils/recentKeyword';
 
 const RECOMMENDS = ['B형간염', '비만', '관절염', '우울증', '식도염'];
 
@@ -9,7 +8,7 @@ interface Props {
   searchKeyword: (keyword: string) => void;
 }
 const SearchBarDropdownDefault = ({ searchKeyword }: Props) => {
-  const recentKeywords = getLocalStroage<string[]>(RECENT_KEY, []);
+  const recentKeywords = getRecentKeywords();
 
   return (
     <>
@@ -56,7 +55,7 @@ const StyledRecommendDiv = styled.div`
   padding: 10px 24px;
 `;
 
-const StyledButton = styled.button`
+const StyledButton = styled.div`
   display: inline-block;
   font-size: 12px;
   font-weight: 400;

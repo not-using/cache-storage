@@ -1,16 +1,13 @@
 import { ComponentProps, FormEventHandler, useRef, useState } from 'react';
 import { useSearch } from 'hooks/useSearch';
 import { useEvent } from 'hooks/useEvent';
-import { getLocalStroage, setLocalStroage } from 'utils/localStorage';
-import { MAX_RECENT, RECENT_KEY } from 'constants/recentKeyword';
+import { addRecentKeyword } from 'utils/recentKeyword';
 import styled from 'styled-components';
 import Input from 'components/commons/Input';
 import SearchBarDropdown from 'components/search/SearchBarDropdown';
 import { ReactComponent as SearchIcon } from 'asset/img/search.svg';
 
-type Props = ComponentProps<'form'>;
-
-const SearchBar = ({ ...rest }: Props) => {
+const SearchBar = ({ ...rest }: ComponentProps<'form'>) => {
   const { keyword, searchKeyword, setKeyword, recommends } = useSearch();
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -27,8 +24,7 @@ const SearchBar = ({ ...rest }: Props) => {
     e.preventDefault();
     const searched = keyword.trim();
     if (searched.length === 0) return;
-    const recentKeywords = getLocalStroage<string[]>(RECENT_KEY);
-    setLocalStroage(RECENT_KEY, [...recentKeywords, searched].slice(0, MAX_RECENT));
+    addRecentKeyword(searched);
   };
 
   return (
