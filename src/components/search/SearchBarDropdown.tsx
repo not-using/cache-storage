@@ -1,28 +1,18 @@
-import { forwardRef } from 'react';
-import type { Sick } from 'types/Sick';
+import { ComponentProps, forwardRef, useContext } from 'react';
+import { SearchContext } from 'context/SearchContext';
 import styled from 'styled-components';
 import SearchBarDropdownDefault from './SearchBarDropdownDefault';
 import SearchBarDropdownRecommend from './SearchBarDropdownRecommend';
 
-interface Props {
-  recommends: Sick[];
-  keyword: string;
-  setKeyword: (keyword: string) => void;
-  searchKeyword: (keyword: string) => void;
-}
-
-const SearchBarDropdown = forwardRef<HTMLDivElement, Props>(
-  ({ keyword, recommends, setKeyword, searchKeyword }, ref) => {
+const SearchBarDropdown = forwardRef<HTMLDivElement, ComponentProps<'div'>>(
+  (props, ref) => {
+    const { keyword } = useContext(SearchContext);
     return (
-      <StyledDiv ref={ref}>
+      <StyledDiv {...props} ref={ref}>
         {keyword.length === 0 ? (
-          <SearchBarDropdownDefault searchKeyword={searchKeyword} />
+          <SearchBarDropdownDefault />
         ) : (
-          <SearchBarDropdownRecommend
-            keyword={keyword}
-            recommends={recommends}
-            setKeyword={setKeyword}
-          />
+          <SearchBarDropdownRecommend />
         )}
       </StyledDiv>
     );

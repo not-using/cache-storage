@@ -1,16 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { SearchContext } from 'context/SearchContext';
 import { useEvent } from 'hooks/useEvent';
-import type { Sick } from 'types/Sick';
 import styled from 'styled-components';
 import SearchKeywordItem from './SearchKeywordItem';
 
-interface Props {
-  keyword: string;
-  recommends: Sick[];
-  setKeyword: (keyword: string) => void;
-}
-
-const SearchBarDropdownRecommend = ({ keyword, recommends, setKeyword }: Props) => {
+const SearchBarDropdownRecommend = () => {
+  const { recommends, setKeyword, keyword } = useContext(SearchContext);
   const [selectedIndex, setSelectedIndex] = useState<number>(recommends.length - 1);
 
   const changeIndex = (index: number) => {

@@ -1,5 +1,5 @@
-import { ComponentProps, FormEventHandler, useRef, useState } from 'react';
-import { useSearch } from 'hooks/useSearch';
+import { ComponentProps, FormEventHandler, useContext, useRef, useState } from 'react';
+import { SearchContext } from 'context/SearchContext';
 import { useEvent } from 'hooks/useEvent';
 import { addRecentKeyword } from 'utils/recentKeyword';
 import styled from 'styled-components';
@@ -8,7 +8,7 @@ import SearchBarDropdown from 'components/search/SearchBarDropdown';
 import { ReactComponent as SearchIcon } from 'asset/img/search.svg';
 
 const SearchBar = ({ ...rest }: ComponentProps<'form'>) => {
-  const { keyword, searchKeyword, setKeyword, recommends } = useSearch();
+  const { keyword, searchKeyword } = useContext(SearchContext);
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -39,15 +39,7 @@ const SearchBar = ({ ...rest }: ComponentProps<'form'>) => {
         onFocus={() => setIsFocused(true)}
       />
       <SearchButton />
-      {isFocused ? (
-        <SearchBarDropdown
-          ref={dropdownRef}
-          recommends={recommends}
-          keyword={keyword}
-          setKeyword={setKeyword}
-          searchKeyword={searchKeyword}
-        />
-      ) : null}
+      {isFocused ? <SearchBarDropdown ref={dropdownRef} /> : null}
     </StyledForm>
   );
 };

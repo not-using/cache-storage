@@ -1,10 +1,13 @@
+import { SearchContextProvider } from 'context/SearchContext';
 import styled from 'styled-components';
 import SearchBar from 'components/search/SearchBar';
 
 const SearchBanner = () => {
   return (
     <StyledDiv>
-      <SearchBar />
+      <SearchContextProvider>
+        <SearchBar />
+      </SearchContextProvider>
     </StyledDiv>
   );
 };
