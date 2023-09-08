@@ -76,6 +76,7 @@ const StyledButton = styled.div`
   border: none;
   border-radius: 20px;
   margin: 0 4px;
+  cursor: pointer;
 `;
 
 const StyledSearchKeywordItem = styled(SearchKeywordItem)`

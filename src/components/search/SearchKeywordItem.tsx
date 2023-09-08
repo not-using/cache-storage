@@ -47,6 +47,7 @@ const StyledButton = styled.button`
   background-color: transparent;
   font-weight: 400;
   font-size: 16px;
+  text-align: left;
 `;
 
 const Icon = styled(SearchIcon)`

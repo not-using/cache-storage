@@ -37,9 +37,6 @@ const SearchBar = ({ ...rest }: ComponentProps<'form'>) => {
         onChange={(e) => searchRecommends(e.currentTarget.value)}
         onFocus={() => setIsFocused(true)}
       />
-      <SearchButton type="submit">
-        <Icon width={21} />
-      </SearchButton>
       <DeleteButton
         type="button"
         onClick={(e) => {
@@ -48,6 +45,9 @@ const SearchBar = ({ ...rest }: ComponentProps<'form'>) => {
         }}
         size={20}
       />
+      <SearchButton type="submit">
+        <Icon width={21} />
+      </SearchButton>
       {isFocused ? <SearchBarDropdown ref={dropdownRef} /> : null}
     </StyledForm>
   );
@@ -116,8 +116,5 @@ const SearchButton = styled.button`
 `;
 
 const DeleteButton = styled(XButton)`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 64px;
+  margin: 0 10px;
 `;
