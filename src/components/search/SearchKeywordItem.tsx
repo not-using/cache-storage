@@ -51,6 +51,9 @@ const StyledButton = styled.button`
   &:focus {
     border: none;
   }
+  &:hover {
+    background-color: #eeeeee;
+  }
 `;
 
 const Icon = styled(SearchIcon)`
