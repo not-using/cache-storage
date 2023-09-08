@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { SearchContext } from 'context/SearchContext';
+import { SearchContext } from 'contexts/SearchContext';
 import { useEvent } from 'hooks/useEvent';
 import styled from 'styled-components';
 import SearchKeywordItem from './SearchKeywordItem';

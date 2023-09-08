@@ -1,11 +1,11 @@
 import { ComponentProps, FormEventHandler, useContext, useRef, useState } from 'react';
-import { SearchContext } from 'context/SearchContext';
+import { SearchContext } from 'contexts/SearchContext';
 import { useEvent } from 'hooks/useEvent';
 import styled from 'styled-components';
 import Input from 'components/commons/Input';
 import SearchBarDropdown from 'components/search/SearchBarDropdown';
 import XButton from 'components/commons/XButton';
-import { ReactComponent as SearchIcon } from 'asset/img/search.svg';
+import { ReactComponent as SearchIcon } from 'assets/img/search.svg';
 
 const SearchBar = ({ ...rest }: ComponentProps<'form'>) => {
   const { keyword, setKeyword, searchKeyword, searchRecommends } =

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDebounce } from './useDebounce';
 import { useRecentKeyword } from './useRecentKeyword';
-import { getSick } from 'api/getSick';
+import { getSick } from 'apis/getSick';
 import type { Sick } from 'types/Sick';
 
 export const useSearch = () => {

@@ -1,4 +1,4 @@
-import { SearchContextProvider } from 'context/SearchContext';
+import { SearchContextProvider } from 'contexts/SearchContext';
 import styled from 'styled-components';
 import SearchBar from 'components/search/SearchBar';
 

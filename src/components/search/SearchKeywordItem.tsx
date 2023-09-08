@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
-import { ReactComponent as SearchIcon } from 'asset/img/search.svg';
+import { ReactComponent as SearchIcon } from 'assets/img/search.svg';
 import { ComponentProps, forwardRef, useContext } from 'react';
-import { SearchContext } from 'context/SearchContext';
+import { SearchContext } from 'contexts/SearchContext';
 
 interface Props extends ComponentProps<'button'> {
   keyword: string;

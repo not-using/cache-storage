@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { SearchContext } from 'context/SearchContext';
+import { SearchContext } from 'contexts/SearchContext';
 import styled from 'styled-components';
 import SearchKeywordItem from './SearchKeywordItem';
 import XButton from 'components/commons/XButton';

@@ -1,5 +1,5 @@
 import { ComponentProps, forwardRef, useContext } from 'react';
-import { SearchContext } from 'context/SearchContext';
+import { SearchContext } from 'contexts/SearchContext';
 import styled from 'styled-components';
 import SearchBarDropdownDefault from './SearchBarDropdownDefault';
 import SearchBarDropdownRecommend from './SearchBarDropdownRecommend';

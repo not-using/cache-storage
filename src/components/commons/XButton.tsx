@@ -1,4 +1,4 @@
-import { ReactComponent as XIcon } from 'asset/img/x.svg';
+import { ReactComponent as XIcon } from 'assets/img/x.svg';
 import { ComponentProps } from 'react';
 import { styled } from 'styled-components';
 
