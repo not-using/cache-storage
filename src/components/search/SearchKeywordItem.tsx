@@ -48,6 +48,9 @@ const StyledButton = styled.button`
   font-weight: 400;
   font-size: 16px;
   text-align: left;
+  &:focus {
+    border: none;
+  }
 `;
 
 const Icon = styled(SearchIcon)`
